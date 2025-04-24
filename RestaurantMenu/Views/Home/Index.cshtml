@@ -1,0 +1,703 @@
+﻿@{
+    Layout = null;
+}
+@model UserResponseModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer LocalizationManager;
+@{
+    var IsEnlish = System.Globalization.CultureInfo.CurrentCulture.Name.StartsWith("ar") ? false : true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr) </title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/index2/assets/img/favicon.png" rel="icon">
+    <link href="~/index2/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/index2/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/index2/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    @if (IsEnlish)
+    {
+        <link href="~/index2/assets/css/style.css" rel="stylesheet">
+    }
+    else
+    {
+        <link href="~/index2/assets/css/styleAr.css" rel="stylesheet">
+    }
+
+</head>
+
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+
+            <div class="contact-info d-none  d-md-flex align-items-center">
+
+                <i class="bi bi-phone d-flex align-items-center">
+                    <a class="mobilenumberspan" href="tel:@LocalizationManager["MobileNumber"]"><span>@LocalizationManager["MobileNumber"]</span></a>
+                </i>
+                <i class="bi bi-clock d-flex align-items-center automargin15rem"><span>@LocalizationManager["WorkingHours"]</span></i>
+            </div>
+
+            <div class="languages  d-md-flex align-items-center">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("SwitchLanguage", "Lang", new { cluture = "en-US", returnUrl = ViewContext.HttpContext.Request.PathBase + ViewContext.HttpContext.Request.Path + ViewContext.HttpContext.Request.QueryString })">
+                            @LocalizationManager["English"]
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SwitchLanguage", "Lang", new { cluture = "ar-JO", returnUrl = ViewContext.HttpContext.Request.PathBase + ViewContext.HttpContext.Request.Path + ViewContext.HttpContext.Request.QueryString })">
+                            @LocalizationManager["Arabic"]
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-cente">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+            <h1 class="logo  me-lg-0"><a href="index.html">@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr)</a></h1>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">@LocalizationManager["Home"]</a></li>
+                    <li><a class="nav-link scrollto" href="#about">@LocalizationManager["About"]</a></li>
+                    <li><a class="nav-link scrollto" href="#menu">@LocalizationManager["Menu"]</a></li>
+                    <li><a class="nav-link scrollto" href="#specials">@LocalizationManager["Specials"]</a></li>
+                    <li><a class="nav-link scrollto" href="#events">@LocalizationManager["Events"]</a></li>
+                    <li><a class="nav-link scrollto" href="#gallery">@LocalizationManager["Gallery"]</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">@LocalizationManager["Contact"]</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <a href="#contact" class="book-a-table-btn scrollto d-none d-lg-flex">@LocalizationManager["OurLocation"]</a>
+
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+            <div class="row">
+                <div class="col-lg-8 textalign">
+                    <h1>@LocalizationManager["Welcometo"] <span>@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr)</span></h1>
+                    <h2>@LocalizationManager["MainDescription"]</h2>
+
+                    <div class="btns">
+                        <a href="#menu" class="btn-menu animated fadeInUp scrollto">@LocalizationManager["OurMenu"]</a>
+                        <a href="#contact" class="btn-book animated fadeInUp scrollto">@LocalizationManager["OurLocation"]</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+                    <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="glightbox play-btn"></a>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="about-img">
+                            <img src="~/index2/assets/img/about.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                        <h3>@LocalizationManager["AboutHeading"]</h3>
+                        <p class="fst-italic">
+                            @LocalizationManager["AboutDescription"]
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> @LocalizationManager["AboutPoint1"]</li>
+                            <li><i class="bi bi-check-circle"></i> @LocalizationManager["AboutPoint2"]</li>
+                            <li><i class="bi bi-check-circle"></i> @LocalizationManager["AboutPoint3"]</li>
+                        </ul>
+                        <p>
+                            @LocalizationManager["AboutExtraInfo"]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End About Section -->
+        <!-- ======= Why Us Section ======= -->
+        <section id="why-us" class="why-us">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>@LocalizationManager["WhyUsTitle"]</h2>
+                    <p>@LocalizationManager["WhyChooseUs"]</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                            <span>01</span>
+                            <h4>@LocalizationManager["WhyUsPoint1Title"]</h4>
+                            <p>@LocalizationManager["WhyUsPoint1Desc"]</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        <div class="box" data-aos="zoom-in" data-aos-delay="200">
+                            <span>02</span>
+                            <h4>@LocalizationManager["WhyUsPoint2Title"]</h4>
+                            <p>@LocalizationManager["WhyUsPoint2Desc"]</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        <div class="box" data-aos="zoom-in" data-aos-delay="300">
+                            <span>03</span>
+                            <h4>@LocalizationManager["WhyUsPoint3Title"]</h4>
+                            <p>@LocalizationManager["WhyUsPoint3Desc"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Why Us Section -->
+        <!-- ======= Menu Section ======= -->
+        <section id="menu" class="menu section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>@LocalizationManager["Menu"]</h2>
+                    <p>@LocalizationManager["MainDescription"]</p>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <ul id="menu-flters">
+                            <li data-filter="*" class="filter-active">@LocalizationManager["All"]</li>
+
+                            @if (Model?.Categories != null && Model.Categories.Any())
+                            {
+                                foreach (var categoryModel in Model.Categories)
+                                {
+                                    var categoryClass = $"filter-{categoryModel.Category.CategoryNameEn.ToLower().Replace(" ", "-")}";
+                                    <li data-filter=".@categoryClass">
+                                        @(IsEnlish ? @categoryModel.Category.CategoryNameEn : @categoryModel.Category.CategoryNameAr)
+                                    </li>
+
+                                }
+                            }
+                            else
+                            {
+                                <p>@LocalizationManager["NoCategoriesAvailable"]</p>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+                    @if (Model?.Categories != null && Model.Categories.Any())
+                    {
+                        foreach (var categoryModel in Model.Categories)
+                        {
+                            var categoryClass = $"filter-{categoryModel.Category.CategoryNameEn.ToLower().Replace(" ", "-")}";
+
+                            if (categoryModel.Items != null && categoryModel.Items.Any())
+                            {
+                                foreach (var item in categoryModel.Items)
+                                {
+                                    <div class="col-lg-6 menu-item @categoryClass">
+                                        @if (!string.IsNullOrEmpty(item.ItemImg))
+                                        {
+                                            <img src="@(item.ItemImg.StartsWith("data:image") ? item.ItemImg : "data:image/png;base64," + item.ItemImg)"
+                                                 class="menu-img" alt="@item.ItemNameEn">
+                                        }
+                                        <div class="menu-content">
+                                            <a href="javascript:void(0)"> @(IsEnlish ? @item.ItemNameEn : @item.ItemNameAr)</a><span>@item.ItemPrice @LocalizationManager["JD"]</span>
+                                        </div>
+                                        <div class="menu-ingredients">
+                                            @(IsEnlish ? @item.ItemDescEn : @item.ItemDescAr)
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p>@LocalizationManager["NoItemsAvailable"]</p>
+                    }
+                </div>
+            </div>
+        </section><!-- End Menu Section -->
+        <!-- ======= Specials Section ======= -->
+        <section id="specials" class="specials">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>@LocalizationManager["Specials"]</h2>
+                    <p>@LocalizationManager["CheckOurSpecials"]</p>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-3">
+                        <ul class="nav nav-tabs flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">@LocalizationManager["Special1"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">@LocalizationManager["Special2"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">@LocalizationManager["Special3"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">@LocalizationManager["Special4"]</a>
+                            </li>
+                            @*      <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">@LocalizationManager["Special5"]</a>
+                            </li> *@
+                        </ul>
+                    </div>
+                    <div class="col-lg-9 mt-4 mt-lg-0">
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="tab-1">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>@LocalizationManager["Special1Title"]</h3>
+                                        <p class="fst-italic">@LocalizationManager["Special1Desc"]</p>
+                                        <p>@LocalizationManager["Special1Details"]</p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="~/index2/assets/img/specials-1.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-2">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>@LocalizationManager["Special2Title"]</h3>
+                                        <p class="fst-italic">@LocalizationManager["Special2Desc"]</p>
+                                        <p>@LocalizationManager["Special2Details"]</p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="~/index2/assets/img/specials-2.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-3">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>@LocalizationManager["Special3Title"]</h3>
+                                        <p class="fst-italic">@LocalizationManager["Special3Desc"]</p>
+                                        <p>@LocalizationManager["Special3Details"]</p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="~/index2/assets/img/specials-3.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-4">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>@LocalizationManager["Special4Title"]</h3>
+                                        <p class="fst-italic">@LocalizationManager["Special4Desc"]</p>
+                                        <p>@LocalizationManager["Special4Details"]</p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="~/index2/assets/img/specials-4.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Specials Section -->
+        <!-- ======= events Section ======= -->
+        <section id="events" class="events">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>@LocalizationManager["Events"]</h2>
+                    <p>@LocalizationManager["OrganizeYourEvents"]</p>
+                </div>
+
+                <div class="events-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="~/index2/assets/img/event-birthday.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>@LocalizationManager["BirthdayParties"]</h3>
+                                    <div class="price">
+                                        <p><span>$189</span></p>
+                                    </div>
+                                    <p class="fst-italic">@LocalizationManager["EventDescription"]</p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature1"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature2"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature3"]</li>
+                                    </ul>
+                                    <p>@LocalizationManager["EventConclusion"]</p>
+                                </div>
+                            </div>
+                        </div><!-- End Event item -->
+
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="~/index2/assets/img/event-private.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>@LocalizationManager["PrivateParties"]</h3>
+                                    <div class="price">
+                                        <p><span>$290</span></p>
+                                    </div>
+                                    <p class="fst-italic">@LocalizationManager["EventDescription"]</p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature1"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature2"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature3"]</li>
+                                    </ul>
+                                    <p>@LocalizationManager["EventConclusion"]</p>
+                                </div>
+                            </div>
+                        </div><!-- End Event item -->
+
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="~/index2/assets/img/event-custom.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>@LocalizationManager["CustomParties"]</h3>
+                                    <div class="price">
+                                        <p><span>$99</span></p>
+                                    </div>
+                                    <p class="fst-italic">@LocalizationManager["EventDescription"]</p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature1"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature2"]</li>
+                                        <li><i class="bi bi-check-circled"></i> @LocalizationManager["EventFeature3"]</li>
+                                    </ul>
+                                    <p>@LocalizationManager["EventConclusion"]</p>
+                                </div>
+                            </div>
+                        </div><!-- End Event item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section><!-- End Events Section -->
+        <!-- ======= Gallery Section ======= -->
+        <section id="gallery" class="gallery">
+
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>@LocalizationManager["Gallery"]</h2>
+                    <p>@LocalizationManager["SomePhotosFromOurRestaurant"]</p>
+                </div>
+            </div>
+
+            <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row g-0">
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-1.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-2.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-3.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-4.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-5.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-6.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-7.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="~/index2/assets/img/gallery/gallery-8.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="~/index2/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Gallery Section -->
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>@LocalizationManager["Contact"]</h2>
+                    <p>@LocalizationManager["ContactUs"]</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-up">
+                <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3364.029315339556!2d35.8757958752561!3d32.52536399680481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c765c48477983%3A0xbe8d814c3bdec086!2sThe%20Hive!5e0!3m2!1sen!2sjo!4v1741533066468!5m2!1sen!2sjo" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div class="container" data-aos="fade-up">
+
+                <div class="row mt-5">
+
+                    <div class="col-lg-4">
+                        <div class="info">
+                            <div class="address">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>@LocalizationManager["Location"]</h4>
+                                <p>@LocalizationManager["AddressDetails"]</p>
+                            </div>
+
+                            <div class="open-hours">
+                                <i class="bi bi-clock"></i>
+                                <h4>@LocalizationManager["OpenHours"]</h4>
+                                <p>
+                                    @LocalizationManager["Monday-Saturday"]<br>
+                                    @LocalizationManager["OpenTime"]
+                                </p>
+                            </div>
+
+                            <div class="email">
+                                <i class="bi bi-envelope"></i>
+                                <h4> @LocalizationManager["EmailLabel"]</h4>
+                                <p>@LocalizationManager["Email"]</p>
+                            </div>
+
+                            <div class="phone">
+                                <i class="bi bi-phone"></i>
+                                <h4>@LocalizationManager["Call"]</h4>
+                                <a href="tel:@LocalizationManager["MobileNumber"]">
+                                    <p class="mobilenumberspan">@LocalizationManager["MobileNumber"]</p>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-8 mt-5 mt-lg-0">
+                        <form id="contactForm" class="php-email-form">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="@LocalizationManager["YourName"]" required>
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="@LocalizationManager["YourMobile"]" required>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="@LocalizationManager["Subject"]" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea class="form-control" name="message" id="message" rows="8" placeholder="@LocalizationManager["Message"]" required></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">@LocalizationManager["Loading"]</div>
+                                <div class="sent-message">@LocalizationManager["sent-message"]</div>
+                            </div>
+                            <div class="text-center"><button type="submit">@LocalizationManager["SendMessage"]</button></div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr)</h3>
+                            <p>
+                                @LocalizationManager["AddressDetails"] <br>
+                                <strong>@LocalizationManager["EmailLabel"]</strong> @LocalizationManager["Email"]<br>
+                            </p>
+                            <br><br>
+
+                            <div class="social-links mt-3">
+                                <a href="https://x.com/the_hive_coffee?lang=ar" class="twitter" target="_blank" rel="noopener noreferrer">
+                                    <i class="bx bxl-twitter"></i>
+                                </a>
+                                <a href="https://web.facebook.com/TheHiveCoffee/?_rdc=1&_rdr#" class="facebook" target="_blank" rel="noopener noreferrer">
+                                    <i class="bx bxl-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/the_hive_coffee/?hl=en" class="instagram" target="_blank" rel="noopener noreferrer">
+                                    <i class="bx bxl-instagram"></i>
+                                </a>
+                                <a href="tel:@LocalizationManager["MobileNumber"]" class="Calls">
+                                    <i class="bx bxs-phone-call"></i>
+                                </a>
+                                <a href="https://maps.app.goo.gl/BkmjG35rgxmrEA8V8" class="Map" target="_blank" rel="noopener noreferrer">
+                                    <i class="bx bxs-map"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>@LocalizationManager["UsefulLinks"]</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#hero">@LocalizationManager["Home"]</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#about">@LocalizationManager["About"]</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#menu">@LocalizationManager["Menu"]</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#gallery">@LocalizationManager["Gallery"]</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#contact">@LocalizationManager["Contact"]</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr)</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a target="_blank" href="https://www.instagram.com/gt_web9?igsh=MW9pdjF3Z2p3aGky&utm_source=qr">GT</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+
+    <script src="~/index2/assets/vendor/aos/aos.js"></script>
+    <script src="~/index2/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/index2/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/index2/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/index2/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/index2/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/index2/assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#contactForm").submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+                debugger
+                $(".loading").show();
+                $(".error-message").hide();
+                $(".sent-message").hide();
+
+                var messageData = {
+                    name: $("#name").val(),
+                    mobileNumber: $("#mobileNumber").val(),
+                    subject: $("#subject").val(),
+                    message: $("#message").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("SendMessage", "Home")",
+                    contentType: "application/json",
+                    data: JSON.stringify(messageData),
+                    success: function (response) {
+                                        $(".error-message").hide();
+                        $(".loading").hide();
+                        $(".sent-message").show();
+                        $("#contactForm")[0].reset(); // Clear the form
+                    },
+                    error: function (xhr) {
+                        $(".loading").hide();
+                        $(".error-message").text("Error sending message. Please try again.").show();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

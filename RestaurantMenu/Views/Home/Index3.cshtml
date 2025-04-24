@@ -1,0 +1,455 @@
+﻿@{
+    Layout = null;
+}
+@model UserResponseModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer LocalizationManager;
+@{
+    var IsEnlish = System.Globalization.CultureInfo.CurrentCulture.Name.StartsWith("ar") ? false : true;
+}
+<!DOCTYPE html>
+
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Foodee &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FREEHTML5.CO" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Merriweather:300,400italic,300italic,400,700italic' rel='stylesheet' type='text/css'>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="~/index3/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="~/index3/css/icomoon.css">
+    <!-- Simple Line Icons -->
+    <link rel="stylesheet" href="~/index3/css/simple-line-icons.css">
+    <!-- Datetimepicker -->
+    <link rel="stylesheet" href="~/index3/css/bootstrap-datetimepicker.min.css">
+    <!-- Flexslider -->
+    <link rel="stylesheet" href="~/index3/css/flexslider.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="~/index3/css/bootstrap.css">
+
+    <link rel="stylesheet" href="~/index3/css/style.css">
+
+    <script src="~/index3/js/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <div id="fh5co-container">
+        <div id="fh5co-home" class="js-fullheight" data-section="home">
+            <div class="flexslider">
+                <div class="fh5co-overlay"></div>
+                <div class="fh5co-text">
+                    <div class="container">
+                        <div class="row">
+                            <h1 class="to-animate">@(IsEnlish ? @Model.RestaurantNameEn : @Model.RestaurantNameAr)</h1>
+                            <h2 class="to-animate">Lovely Designed <span>by</span> <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+                        </div>
+                    </div>
+                </div>
+                <ul class="slides">
+                    <li style="background-image: url(/index3/images/slide_1.jpg);" data-stellar-background-ratio="0.5"></li>
+                    <li style="background-image: url(/index3/images/slide_2.jpg);" data-stellar-background-ratio="0.5"></li>
+                    <li style="background-image: url(/index3/images/slide_3.jpg);" data-stellar-background-ratio="0.5"></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div id="fh5co-menus" data-section="menu">
+            <div class="container">
+                <div class="row text-center fh5co-heading row-padded">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="heading to-animate">@LocalizationManager["FoodMenu"]</h2>
+                        <p class="sub-heading to-animate">@LocalizationManager["MenuItems"]</p>
+                    </div>
+                </div>
+                <div class="row row-padded">
+                    @if (Model != null && Model.Categories != null && Model.Categories.Any())
+                    {
+                        foreach (var categoryModel in Model.Categories)
+                        {
+                            <div class="col-md-6">
+                                <div class="fh5co-food-menu to-animate-2">
+                                    <h2 class="fh5co-drinks">@(IsEnlish ? categoryModel.Category.CategoryNameEn : categoryModel.Category.CategoryNameAr)</h2>
+                                    <ul>
+                                        @if (categoryModel.Items != null && categoryModel.Items.Any())
+                                        {
+                                            foreach (var item in categoryModel.Items)
+                                            {
+                                                <li>
+                                                    <div class="fh5co-food-desc">
+                                                        <figure>
+                                                            @if (!string.IsNullOrEmpty(item.ItemImg))
+                                                            {
+                                                                <img src="@(item.ItemImg.StartsWith("data:image") ? item.ItemImg : "data:image/png;base64," + item.ItemImg)" class="img-responsive" alt="@item.ItemNameEn">
+                                                            }
+                                                        </figure>
+                                                        <div>
+                                                            <h3>@(IsEnlish ? item.ItemNameEn : item.ItemNameAr)</h3>
+                                                            <p>@(IsEnlish ? item.ItemDescEn : item.ItemDescAr)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fh5co-food-pricing">
+                                                        @item.ItemPrice Jd
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li>No items available for this category.</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No categories available.</p>
+                    }
+                </div>
+            </div>
+        </div>
+@* 
+
+
+        <div id="fh5co-menus" data-section="menu">
+            <div class="container">
+                <div class="row text-center fh5co-heading row-padded">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="heading to-animate">Food Menu</h2>
+                        <p class="sub-heading to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    </div>
+                </div>
+                <div class="row row-padded">
+                    <div class="col-md-6">
+                        <div class="fh5co-food-menu to-animate-2">
+                            <h2 class="fh5co-drinks">Drinks</h2>
+                            <ul>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_5.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Pineapple Juice</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $17.50
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_6.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Green Juice</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $7.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_7.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Soft Drinks</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_5.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Carlo Rosee Drinks</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="fh5co-food-menu to-animate-2">
+                            <h2 class="fh5co-dishes">Steak</h2>
+                            <ul>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_3.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Beef Steak</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $17.50
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_4.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Tomato with Chicken</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $7.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_2.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Sausages from Italy</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_8.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Beef Grilled</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="fh5co-food-menu to-animate-2">
+                            <h2 class="fh5co-drinks">Drinks</h2>
+                            <ul>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_5.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Pineapple Juice</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $17.50
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_6.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Green Juice</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $7.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_7.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Soft Drinks</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_5.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Carlo Rosee Drinks</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="fh5co-food-menu to-animate-2">
+                            <h2 class="fh5co-dishes">Steak</h2>
+                            <ul>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_3.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Beef Steak</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $17.50
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_4.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Tomato with Chicken</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $7.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_2.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Sausages from Italy</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fh5co-food-desc">
+                                        <figure>
+                                            <img src="~/index3/images/res_img_8.jpg" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
+                                        </figure>
+                                        <div>
+                                            <h3>Beef Grilled</h3>
+                                            <p>Far far away, behind the word mountains.</p>
+                                        </div>
+                                    </div>
+                                    <div class="fh5co-food-pricing">
+                                        $12.99
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center to-animate-2">
+                        <p><a href="#" class="btn btn-primary btn-outline">More Food Menu</a></p>
+                    </div>
+                </div>
+            </div>
+        </div> *@
+    </div>
+
+    <div id="fh5co-footer">
+        <div class="container">
+            <div class="row row-padded">
+                <div class="col-md-12 text-center">
+                    <p class="to-animate">
+                        &copy; 2016 Foodee Free HTML5 Template. <br> Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> Demo Images: <a href="http://pexels.com/" target="_blank">Pexels</a> <br> Tasty Icons Free <a href="http://handdrawngoods.com/store/tasty-icons-free-food-icons/" target="_blank">handdrawngoods</a>
+                    </p>
+                    <p class="text-center to-animate"><a href="#" class="js-gotop">Go To Top</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="fh5co-social">
+                        <li class="to-animate-2"><a href="#"><i class="icon-facebook"></i></a></li>
+                        <li class="to-animate-2"><a href="#"><i class="icon-twitter"></i></a></li>
+                        <li class="to-animate-2"><a href="#"><i class="icon-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery -->
+    <script src="~/index3/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="~/index3/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/index3/js/bootstrap.min.js"></script>
+    <!-- Bootstrap DateTimePicker -->
+    <script src="~/index3/js/moment.js"></script>
+    <script src="~/index3/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/index3/js/jquery.waypoints.min.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="~/index3/js/jquery.stellar.min.js"></script>
+
+    <!-- Flexslider -->
+    <script src="~/index3/js/jquery.flexslider-min.js"></script>
+    <script>
+         $(function () {
+            $('#date').datetimepicker();
+        });
+    </script>
+    <!-- Main JS -->
+    <script src="~/index3/js/main.js"></script>
+
+</body>
+</html>
+
