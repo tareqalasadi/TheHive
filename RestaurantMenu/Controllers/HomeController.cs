@@ -35,7 +35,7 @@ namespace RestaurantMenu.Controllers
             {
                 return BadRequest("Decryption failed.");
             }
-
+             
             if (!int.TryParse(decryptedUserIdStr, out int userId))
             {
                 return BadRequest("Invalid User ID format");
